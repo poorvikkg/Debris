@@ -1,4 +1,4 @@
-# 🛡️ Sentinel — AI-Powered Facial Recognition & Intelligent Surveillance Management System
+#  Debris — AI-Powered Facial Recognition & Intelligent Surveillance Management System
 
 [![Node.js](https://img.shields.io/badge/Node.js-v18+-68a063?style=flat-square&logo=node.js)](https://nodejs.org/)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776ab?style=flat-square&logo=python)](https://python.org/)
@@ -9,7 +9,7 @@
 [![FAISS](https://img.shields.io/badge/FAISS-Vector%20Search-blue?style=flat-square)](https://github.com/facebookresearch/faiss)
 [![License](https://img.shields.io/badge/License-MIT-brightgreen?style=flat-square)](#license)
 
-**Sentinel** is an enterprise-grade, real-time facial recognition and intelligent surveillance management platform. Designed with a high-throughput microservices architecture, Sentinel seamlessly connects RTSP camera streams, high-speed neural network computer vision pipelines, vector similarity search, case/suspect management, geospatial tracking, and real-time security alerts into an intuitive operational dashboard.
+**Debris** is an enterprise-grade, real-time facial recognition and intelligent surveillance management platform. Designed with a high-throughput microservices architecture, Sentinel seamlessly connects RTSP camera streams, high-speed neural network computer vision pipelines, vector similarity search, case/suspect management, geospatial tracking, and real-time security alerts into an intuitive operational dashboard.
 
 ---
 
@@ -36,7 +36,7 @@
 
 ## 🌟 Key Features
 
-### 👁️ Real-Time Face Detection & Neural Identification
+###  Real-Time Face Detection & Neural Identification
 - **SCRFD Neural Face Detection**: Multi-scale feature detection across strides (8, 16, 32) capable of capturing faces at variable distances and angles.
 - **5-Point Landmark Face Alignment**: Geometrically normalizes facial pose prior to feature extraction.
 - **ArcFace Deep Embeddings (512D)**: State-of-the-art embedding generation using ONNX Runtime with automatic GPU CUDA acceleration fallback.
