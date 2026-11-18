@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\OneDrive\Desktop\Major\ai-service\routes\videos.py", line 38, in process_video
+    result = process_video_file(filepath, camera_id=camera_id, skip_frames=skip_frames, target_user_id=target_user_id)
+  File "C:\Users\Lenovo\OneDrive\Desktop\Major\ai-service\pipelines\video_pipeline.py", line 154, in process_video_file
+    frame_no, frame = item
+NameError: name 'fps' is not defined
