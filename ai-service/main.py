@@ -96,7 +96,6 @@ app.include_router(streams.router)
 app.include_router(videos.router)
 app.include_router(metrics.router)
 app.include_router(rag_routes.router, prefix="/api/v1")
-app.include_router(rag_routes.router) # also mount directly at /ai/*
 
 @app.get("/health")
 async def health_check():

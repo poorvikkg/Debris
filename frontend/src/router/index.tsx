@@ -8,8 +8,6 @@ import { Login } from '../pages/auth/Login';
 import { Register } from '../pages/auth/Register';
 import { LiveMonitoring } from '../pages/monitoring/LiveMonitoring';
 import { CameraManagement } from '../pages/cameras/CameraManagement';
-import { RecognitionLogs } from '../pages/logs/RecognitionLogs';
-import { UnknownFaces } from '../pages/logs/UnknownFaces';
 import { ComplaintManagement } from '../pages/complaints/ComplaintManagement';
 import { UserManagement } from '../pages/users/UserManagement';
 import { Settings } from '../pages/settings/Settings';
@@ -86,22 +84,7 @@ export const AppRouter: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/logs"
-          element={
-            <ProtectedRoute allowedRoles={['admin']}>
-              <RecognitionLogs />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/unknown-faces"
-          element={
-            <ProtectedRoute allowedRoles={['admin']}>
-              <UnknownFaces />
-            </ProtectedRoute>
-          }
-        />
+        {/* /logs and /unknown-faces routes disabled pending dedicated UI page components */}
         <Route
           path="/recurring-unknowns"
           element={

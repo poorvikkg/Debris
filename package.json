@@ -1,7 +1,7 @@
 {
-  "name": "sentinel-major-project",
+  "name": "debris-surveillance-platform",
   "version": "1.0.0",
-  "description": "Face Recognition & Surveillance Management System - Sentinel",
+  "description": "Debris — AI-Powered Facial Recognition & Intelligent Surveillance Management System",
   "scripts": {
     "start": "python start_all.py",
     "dev": "python start_all.py"

@@ -12,13 +12,11 @@ import {
   Network,
   FilePlus,
   FileQuestion,
-  FileText,
   UserSearch,
   Users,
   Database,
   Shield,
   Aperture,
-  Crosshair,
   Sliders,
   Cpu,
 } from 'lucide-react';
@@ -49,8 +47,6 @@ export const Sidebar: React.FC = () => {
     {
       title: 'Recognition & Records',
       items: [
-        { to: '/logs',               label: 'Recognition Logs',  icon: FileText,     roles: ['admin'] },
-        { to: '/unknown-faces',      label: 'Unknown Face Bank', icon: Crosshair,    roles: ['admin'] },
         { to: '/recurring-unknowns', label: 'Recurring Targets', icon: UserSearch,   roles: ['admin'] },
         { to: '/complaints',         label: 'Case Complaints',   icon: FileQuestion, roles: ['admin', 'station', 'viewer'] },
         { to: '/file-case',          label: 'Register Case',     icon: FilePlus,     roles: ['station'] },

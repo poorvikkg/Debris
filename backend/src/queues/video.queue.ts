@@ -6,26 +6,25 @@ import FormData from 'form-data';
 import * as videoRepo from '../repositories/video.repository';
 import * as complaintRepo from '../repositories/complaint.repository';
 import { logRecognition } from '../services/recognition.service';
+import { createSighting } from '../services/sighting.service';
 import { env } from '../config/env';
-import dotenv from 'dotenv';
-dotenv.config();
+import { logger } from '../config/logger';
 
 const connection = new IORedis({
   host: process.env.REDIS_HOST || 'localhost',
   port: parseInt(process.env.REDIS_PORT || '6379', 10),
   maxRetriesPerRequest: null,
 });
-
 export const videoQueue = new Queue('video-processing', { connection: connection as any });
 
 const worker = new Worker('video-processing', async (job: Job) => {
   const { videoId, targetUserId } = job.data;
-  console.log(`[BullMQ] Starting job for video ${videoId}`);
+  logger.info(`[BullMQ] Starting job for video ${videoId}`);
 
   const video = await videoRepo.findVideoById(videoId);
   if (!video) throw new Error('Video not found');
   if (!fs.existsSync(video.path)) {
-    console.error(`[BullMQ] Video file missing on disk: ${video.path}`);
+    logger.error(`[BullMQ] Video file missing on disk: ${video.path}`);
     await videoRepo.updateVideoStatus(videoId, 'failed');
     throw new Error(`Video file missing on disk: ${video.path}`);
   }
@@ -120,7 +119,6 @@ const worker = new Worker('video-processing', async (job: Job) => {
       const isUnknownFace = log.is_unknown || log.user_id === 'unknown';
 
       try {
-        const createSighting = (await import('../services/sighting.service')).createSighting;
         await createSighting({
           identityType: isUnknownFace ? 'UNKNOWN' : 'KNOWN',
           personId: isUnknownFace ? undefined : log.user_id,
@@ -137,20 +135,20 @@ const worker = new Worker('video-processing', async (job: Job) => {
           trackId: log.track_id ? log.track_id.toString() : undefined,
         });
       } catch (sightingErr) {
-        console.error('[BullMQ] Failed to create sighting for video detection:', sightingErr);
+        logger.error({ err: sightingErr }, '[BullMQ] Failed to create sighting for video detection');
       }
     }
 
     await videoRepo.updateVideoStatus(videoId, 'completed');
-    console.log(`[BullMQ] Finished processing video ${videoId}`);
+    logger.info(`[BullMQ] Finished processing video ${videoId}`);
     return { success: true, aiData };
   } catch (error: any) {
-    console.error(`[BullMQ] Failed to process video ${videoId}:`, error.response?.data || error.message);
+    logger.error({ err: error.response?.data || error.message }, `[BullMQ] Failed to process video ${videoId}`);
     await videoRepo.updateVideoStatus(videoId, 'failed');
     throw error;
   }
 }, { connection: connection as any });
 
 worker.on('failed', (job, err) => {
-  console.error(`[BullMQ] Job ${job?.id} failed:`, err);
+  logger.error({ err }, `[BullMQ] Job ${job?.id} failed`);
 });

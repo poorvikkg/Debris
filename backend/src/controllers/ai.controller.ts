@@ -17,7 +17,7 @@ export async function query(req: AuthRequest, res: Response, next: NextFunction)
       return;
     }
 
-    const aiRes = await axios.post(`${env.aiServiceUrl}/ai/query`, {
+    const aiRes = await axios.post(`${env.aiServiceUrl}/api/v1/ai/query`, {
       query: userQuery,
       top_k: top_k || 5,
     }, { timeout: 60000 });
@@ -44,7 +44,7 @@ export async function chat(req: AuthRequest, res: Response, next: NextFunction):
       return;
     }
 
-    const aiRes = await axios.post(`${env.aiServiceUrl}/ai/chat`, {
+    const aiRes = await axios.post(`${env.aiServiceUrl}/api/v1/ai/chat`, {
       session_id: session_id || req.user?._id?.toString() || 'default_session',
       query: userQuery,
       message: userQuery,
@@ -66,7 +66,7 @@ export async function chat(req: AuthRequest, res: Response, next: NextFunction):
 export async function similar(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
   try {
     const { query: userQuery, top_k } = req.body;
-    const aiRes = await axios.post(`${env.aiServiceUrl}/ai/similar`, {
+    const aiRes = await axios.post(`${env.aiServiceUrl}/api/v1/ai/similar`, {
       query: userQuery,
       top_k: top_k || 5,
     }, { timeout: 30000 });
@@ -87,7 +87,7 @@ export async function similar(req: AuthRequest, res: Response, next: NextFunctio
 export async function summarize(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
   try {
     const { query: userQuery } = req.body;
-    const aiRes = await axios.post(`${env.aiServiceUrl}/ai/summarize`, {
+    const aiRes = await axios.post(`${env.aiServiceUrl}/api/v1/ai/summarize`, {
       query: userQuery,
     }, { timeout: 60000 });
 

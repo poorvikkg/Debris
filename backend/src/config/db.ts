@@ -17,18 +17,20 @@ export async function connectDatabase(): Promise<void> {
     });
     logger.info('✅ MongoDB connected successfully');
 
-    // Seed default admin user if not present
+    // Seed default admin user if not present (credentials from env or safe dev defaults)
     const { User } = await import('../models/User');
-    const adminExists = await User.findOne({ email: 'admin@123' });
+    const seedEmail = process.env.SEED_ADMIN_EMAIL || 'admin@debris.local';
+    const seedPassword = process.env.SEED_ADMIN_PASSWORD || 'Admin@Debris2026!';
+    const adminExists = await User.findOne({ email: seedEmail });
     if (!adminExists) {
       await User.create({
         name: 'Administrator',
-        email: 'admin@123',
-        password: 'admin123',
+        email: seedEmail,
+        password: seedPassword,
         role: 'admin',
         isActive: true,
       });
-      logger.info('👤 Seeded default admin account: admin@123 / admin123');
+      logger.info(`👤 Seeded default admin account: ${seedEmail} (set SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD in .env to change)`);
     }
   } catch (error) {
     logger.error({ error }, '❌ MongoDB connection failed');

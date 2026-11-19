@@ -11,7 +11,7 @@ export const env = {
   port: parseInt(process.env.PORT || '5000', 10),
   nodeEnv: process.env.NODE_ENV || 'development',
   mongoUri: process.env.MONGODB_URI || 'mongodb://localhost:27017/surveillance_db',
-  jwtSecret: process.env.JWT_SECRET || 'fallback_secret',
+  jwtSecret: process.env.JWT_SECRET || 'debris-dev-jwt-secret-change-in-prod',
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '7d',
   uploadDir: process.env.UPLOAD_DIR || 'uploads',
   corsOrigin: process.env.CORS_ORIGIN || 'http://localhost:5173',
@@ -22,7 +22,7 @@ export const env = {
     endpoint: process.env.MINIO_ENDPOINT || 'http://localhost:9000',
     accessKey: process.env.MINIO_ACCESS_KEY || 'minioadmin',
     secretKey: process.env.MINIO_SECRET_KEY || 'minioadmin',
-    bucket: process.env.MINIO_BUCKET || 'sentinel-bucket',
+    bucket: process.env.MINIO_BUCKET || 'debris-bucket',
   },
   twilio: {
     accountSid: process.env.TWILIO_ACCOUNT_SID || '',
@@ -34,7 +34,7 @@ export const env = {
 
 // Validate critical variables
 if (!process.env.JWT_SECRET) {
-  console.warn('⚠️  JWT_SECRET not set. Using fallback (unsafe for production).');
+  console.warn('⚠️  JWT_SECRET not set. Using dev fallback (do NOT use in production).');
 }
 
 if (!process.env.TWILIO_ACCOUNT_SID) {

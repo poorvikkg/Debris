@@ -56,7 +56,7 @@ class Settings(BaseSettings):
     
     # ── AI RAG Pipeline ──────────────────────────────────
     GROQ_API_KEY: str = ""
-    GROQ_MODEL: str = "openai/gpt-oss-20b"
+    GROQ_MODEL: str = "llama-3.3-70b-versatile"
     RAG_DATA_DIR: str = os.path.join(BASE_DIR, "rag", "data", "crime_statistics")
     RAG_FAISS_DIR: str = os.path.join(BASE_DIR, "rag", "vectorstore", "storage")
     TOP_K: int = 5

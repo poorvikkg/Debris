@@ -52,7 +52,7 @@ def main():
     ai_dir = os.path.join(root_dir, "ai-service")
     frontend_dir = os.path.join(root_dir, "frontend")
 
-    print_log("SYSTEM", COLOR_BOLD, "Starting Sentinel Face Recognition & Surveillance System...")
+    print_log("SYSTEM", COLOR_BOLD, "Starting Debris — AI-Powered Surveillance System...")
 
     # 1. Start Docker Infrastructure
     print_log("DOCKER", COLOR_DOCKER, "Starting Docker services (MongoDB, Redis, MinIO)...")
