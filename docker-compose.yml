@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: sentinel_mongodb
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./docker_data/mongo:/data/db
+
+  minio:
+    image: minio/minio:latest
+    container_name: sentinel_minio
+    restart: always
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - ./docker_data/minio:/data
+
+  redis:
+    image: redis:alpine
+    container_name: sentinel_redis
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --appendonly yes
+    volumes:
+      - ./docker_data/redis:/data

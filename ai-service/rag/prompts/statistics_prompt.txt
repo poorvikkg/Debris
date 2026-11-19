@@ -1,0 +1,18 @@
+{system_prompt}
+
+Context Information:
+{context}
+
+User Query: {query}
+
+Instructions:
+- Provide an informative, highly structured intelligence report using the active database records and statistical context.
+- Structure your response using clear Markdown sections:
+  1. ### Statistical Executive Summary
+     Overview of total counts, key numbers, active versus closed cases, or crime rate summaries.
+  2. ### Data Breakdown Table
+     ALWAYS format the figures, district breakdown, crime categories, or historical comparisons into a structured Markdown Table (e.g. `| Category / Metric | Total Recorded | Region / District | Period / Year | Status / Trend |`).
+  3. ### Key Analytical Insights
+     Bullet points highlighting trends, anomalies, high-incidence areas, or patterns.
+- Ground all numbers strictly in the provided context.
+

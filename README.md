@@ -8,8 +8,68 @@
 [![Docker](https://img.shields.io/badge/Docker-Enabled-2496ed?style=flat-square&logo=docker)](https://www.docker.com/)
 [![FAISS](https://img.shields.io/badge/FAISS-Vector%20Search-blue?style=flat-square)](https://github.com/facebookresearch/faiss)
 [![License](https://img.shields.io/badge/License-MIT-brightgreen?style=flat-square)](#license)
+[![Hackathon Prototype](https://img.shields.io/badge/🚧%20Hackathon%20Prototype-Building%20Phase-orange?style=flat-square)]()
 
-**Debris** is an enterprise-grade, real-time facial recognition and intelligent surveillance management platform. Designed with a high-throughput microservices architecture, Sentinel seamlessly connects RTSP camera streams, high-speed neural network computer vision pipelines, vector similarity search, case/suspect management, geospatial tracking, and real-time security alerts into an intuitive operational dashboard.
+> **🚧 Hackathon Prototype (Building Phase)** — This codebase is under active development for a hackathon demo. Core AI pipeline, backend APIs, and frontend UI are functional. Some minor UI routes are placeholders.
+
+**Debris** is an enterprise-grade, real-time facial recognition and intelligent surveillance management platform. It seamlessly connects RTSP camera streams, high-speed neural network computer vision pipelines, vector similarity search, case/suspect management, geospatial tracking, and real-time security alerts into an intuitive operational dashboard.
+
+---
+
+## 🚀 Quick Startup (Hackathon)
+
+### Prerequisites
+- **Docker Desktop** running (for MongoDB, Redis, MinIO)
+- **Node.js v18+** and **Python 3.10+**
+- **npm** installed
+
+### 1. Clone & Setup
+```bash
+git clone https://github.com/poorvikkg/Debris.git
+cd Debris
+git checkout Ai-services
+```
+
+### 2. Configure Environment
+```bash
+# Backend
+cp backend/.env.example backend/.env
+# Edit backend/.env — set JWT_SECRET at minimum
+
+# AI Service
+cp ai-service/.env.example ai-service/.env
+# Edit ai-service/.env — set GROQ_API_KEY for RAG chat
+```
+
+### 3. Install Dependencies
+```bash
+# Backend
+cd backend && npm install
+
+# Frontend
+cd ../frontend && npm install
+
+# AI Service (use a venv)
+cd ../ai-service
+python -m venv venv && venv/Scripts/activate   # Windows
+pip install -r requirements.txt
+```
+
+### 4. Start Everything
+```bash
+# From the project root (Windows):
+run.bat
+
+# Or manually:
+python start_all.py
+```
+This will start Docker infra (MongoDB, Redis, MinIO), the FastAPI AI service, the Node.js backend, and the React frontend.
+
+### 5. Open the App
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:5000/api
+- **AI Service**: http://localhost:8000/docs
+- **Default Login**: `admin@debris.local` / `Admin@Debris2026!`
 
 ---
 
@@ -66,7 +126,7 @@
 
 ## 🏗️ System Architecture
 
-Sentinel is organized as a decoupled, event-driven microservices ecosystem:
+Debris is organized as a decoupled, event-driven microservices ecosystem:
 
 ```mermaid
 flowchart TB
@@ -237,7 +297,7 @@ Major/
 
 ## 📋 Prerequisites
 
-Before running Sentinel, ensure you have the following installed:
+Before running Debris, ensure you have the following installed:
 
 - **Node.js**: `v18.0.0` or higher ([Download](https://nodejs.org/))
 - **Python**: `3.10.x` or higher ([Download](https://www.python.org/))
@@ -257,7 +317,7 @@ cd FinalMajor
 
 ### 2. One-Click Startup (Recommended)
 
-Sentinel includes an orchestration script (`start_all.py`) that boots Docker containers, Backend, AI Service, and Frontend with color-coded live logs in a single terminal.
+Debris includes an orchestration script (`start_all.py`) that boots Docker containers, Backend, AI Service, and Frontend with color-coded live logs in a single terminal.
 
 ```bash
 python start_all.py
@@ -342,7 +402,7 @@ npm run dev
 | `MINIO_ENDPOINT` | `http://localhost:9000` | MinIO S3 API endpoint |
 | `MINIO_ACCESS_KEY`| `minioadmin` | MinIO root access key |
 | `MINIO_SECRET_KEY`| `minioadmin` | MinIO root secret key |
-| `MINIO_BUCKET` | `sentinel-bucket` | Default S3 bucket name for evidence files |
+| `MINIO_BUCKET` | `debris-bucket` | Default S3 bucket name for evidence files |
 | `REDIS_URL` | `redis://localhost:6379` | Redis connection URL for BullMQ queues |
 
 ### AI Service (`ai-service/.env`)
@@ -419,7 +479,7 @@ npm run dev
 <summary><b>4. MinIO bucket errors on file upload</b></summary>
 
 - Access the MinIO web dashboard at [http://localhost:9001](http://localhost:9001) with `minioadmin` / `minioadmin`.
-- Ensure the bucket named `sentinel-bucket` exists, or let the backend initialization script auto-create it.
+- Ensure the bucket named `debris-bucket` exists, or let the backend initialization script auto-create it.
 </details>
 
 ---
