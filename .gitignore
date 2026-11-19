@@ -1,6 +1,10 @@
-# Logs
+# Logs and Temporary Debug Logs
 logs
 *.log
+debug*.txt
+debug_*.txt
+*error*.txt
+*.debug.txt
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
